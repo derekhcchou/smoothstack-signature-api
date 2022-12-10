@@ -3,6 +3,7 @@ import { dbResources } from './dbResources';
 
 const serverlessConfiguration: AWS = {
   service: 'smoothstack-signature-db',
+  disabledDeprecations: ['NESTED_CUSTOM_CONFIGURATION_PATH'],
   frameworkVersion: '3',
   provider: {
     name: 'aws',
