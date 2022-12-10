@@ -1,9 +1,8 @@
 import type { AWS } from '@serverless/typescript';
-import { dbResources } from './dbResources';
+import { dbResources } from './resources/db/dbResources';
 
 const serverlessConfiguration: AWS = {
   service: 'smoothstack-signature-db',
-  disabledDeprecations: ['NESTED_CUSTOM_CONFIGURATION_PATH'],
   frameworkVersion: '3',
   provider: {
     name: 'aws',
