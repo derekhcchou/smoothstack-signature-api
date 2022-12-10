@@ -1,1 +1,1 @@
-# smoothstack-signature-api
+# Smoothstack Signature API
