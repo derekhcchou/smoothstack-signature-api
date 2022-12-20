@@ -6,7 +6,14 @@ const signature = async (event: APIGatewayEvent) => {
   try {
     switch (event.httpMethod) {
       case 'GET':
-        return await getSignature(event.queryStringParameters.primaryEmail);
+        const data = await getSignature(event.queryStringParameters.primaryEmail);
+        return {
+          statusCode: 200,
+          body: data,
+          headers: {
+            'Content-Type': 'text/html',
+          },
+        };
     }
   } catch (e) {
     console.error(e);

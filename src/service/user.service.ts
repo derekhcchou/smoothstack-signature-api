@@ -1,7 +1,7 @@
 import { DynamoTables, getDynamoClient } from '@libs/dynamo';
 import { User } from '../model/User';
 
-export const getUser = async (primaryEmail: string) => {
+export const getUser = async (primaryEmail: string): Promise<User> => {
   const dynamoClient = getDynamoClient();
   var params = {
     TableName: DynamoTables.USER,
@@ -9,7 +9,8 @@ export const getUser = async (primaryEmail: string) => {
       primaryEmail,
     },
   };
-  return await dynamoClient.get(params).promise();
+  const data = await dynamoClient.get(params).promise();
+  return data.Item as any;
 };
 
 export const saveUser = async (user: User) => {
