@@ -2,6 +2,8 @@ import type { AWS } from '@serverless/typescript';
 
 import signature from '@functions/signature';
 import { dbResources } from './resources/db/dbResources';
+import user from './src/functions/user';
+import config from './src/functions/config';
 
 const serverlessConfiguration: AWS = {
   service: 'smoothstack-signature-api',
@@ -27,7 +29,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { signature },
+  functions: { signature, user, config },
   resources: {
     Conditions: {
       isLocal: {

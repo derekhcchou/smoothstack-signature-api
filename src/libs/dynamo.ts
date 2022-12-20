@@ -1,5 +1,10 @@
 import { DynamoDB } from 'aws-sdk';
 
+export enum DynamoTables {
+  USER = 'smoothstack-signature-user-table',
+  CONFIG = 'smoothstack-signature-config-table',
+}
+
 export const getDynamoClient = () => {
   const opts =
     process.env.ENV === 'local'
