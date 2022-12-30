@@ -5,8 +5,11 @@ import { getUser } from './user.service';
 
 export const getSignature = async (primaryEmail: string): Promise<string> => {
   const userData = await getUser(primaryEmail);
-  const configData = await getConfig();
-  return constructSignature(userData, configData);
+  if (userData) {
+    const configData = await getConfig();
+    return constructSignature(userData, configData);
+  }
+  return undefined;
 };
 
 const constructSignature = (userData: User, configData: Config): string => {
