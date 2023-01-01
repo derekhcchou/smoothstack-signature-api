@@ -26,15 +26,14 @@ const constructSignature = (userData: User, configData: Config): string => {
 
   let updatedLayout = signatureLayout;
 
-  const { profileUrl, firstName, middleInitial, lastName, title, phoneNumber, calendarUrl, mailingAddress, badgeUrls } =
+  const { profileUrl, firstName, lastName, title, phoneNumber, calendarUrl, mailingAddress, badgeUrls } =
     userData;
 
   const resolvedProfUrl = profileUrl || profileDefaultUrl;
   const profileImg = profileImageSection.replace('[INSERT PROFILE_URL]', resolvedProfUrl);
   updatedLayout = updatedLayout.replace('[INSERT PROFILE_IMG]', profileImg);
-
-  const employeeName = `${firstName} ${middleInitial ? middleInitial.charAt(0) + '. ' : ''}${lastName}`;
-  updatedLayout = updatedLayout.replace('[INSERT EMPLOYEE_NAME]', employeeName);
+  updatedLayout = updatedLayout.replace('[INSERT EMPLOYEE_FIRST_NAME]', firstName);
+  updatedLayout = updatedLayout.replace('[INSERT EMPLOYEE_LAST_NAME]', lastName);
   updatedLayout = updatedLayout.replace('[INSERT EMPLOYEE_TITLE]', title);
 
   const phone = phoneNumber
@@ -46,8 +45,8 @@ const constructSignature = (userData: User, configData: Config): string => {
   const calendar = calendarUrl
     ? calendarSection.replace('[INSERT CALENDAR_URL]', calendarUrl).replace('[INSERT CALENDAR_URL]', calendarUrl)
     : undefined;
-  let address = mailingAddress ? addressSection.replace('[INSERT MAILING_ADDRESS]', mailingAddress) : undefined;
-  const additionalFieldSection = [phone, calendar].join(' | ') + address;
+  let address = mailingAddress ? addressSection.replace('[INSERT MAILING_ADDRESS]', mailingAddress) : '';
+  const additionalFieldSection = [phone, calendar].join(' | ') + address ;
   updatedLayout = updatedLayout.replace('[INSERT ADDITIONAL_FIELDS]', additionalFieldSection);
   const companyLogo = companyLogoSection.replace('[INSERT COMPANY_LOGO_URL]', companyLogoUrl || '');
   updatedLayout = updatedLayout.replace('[INSERT COMPANY_LOGO_IMG]', companyLogo);
